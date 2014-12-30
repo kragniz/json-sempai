@@ -6,7 +6,7 @@ json-sempai
     :target: https://travis-ci.org/kragniz/json-sempai
 
 Have you ever been kept awake at night, desperately feeling a burning desire to
-do nothing else but directly import json files in python? Now you can!
+do nothing else but directly import json files in python [#]_? Now you can!
 
 Usage
 -----
@@ -36,4 +36,7 @@ Now import jsonsempai and your json file!
     u'world'
     >>> tester.this.can.be
     u'nested'
-    >>> 
+    >>>
+
+
+.. [#] Disclaimer: Only do this if you hate yourself and the rest of the world.
