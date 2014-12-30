@@ -15,7 +15,10 @@ class Dot(dict):
                 self[k] = v
 
     def __getattr__(self, attr):
-        return self.get(attr)
+        try:
+            return self[attr]
+        except KeyError:
+            raise AttributeError("'{}'".format(attr))
 
     __setattr__ = dict.__setitem__
 
