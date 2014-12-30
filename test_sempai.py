@@ -6,7 +6,12 @@ import sys
 import tempfile
 
 TEST_FILE = '''{
-"three": 3
+    "three": 3,
+    "one": {
+        "two": {
+            "three": 3
+        }
+    }
 }'''
 
 
@@ -29,6 +34,10 @@ class TestSempai(object):
     def test_access(self):
         import sempai
         assert sempai.three == 3
+
+    def test_access_nested(self):
+        import sempai
+        assert sempai.one.two.three == 3
 
     def test_location(self):
         import sempai
