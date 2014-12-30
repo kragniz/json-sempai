@@ -28,9 +28,10 @@ Now import jsonsempai and your json file!
 
 .. code:: python
 
-    import jsonsempai
-
-    import tester
-
-    print(tester.hello)
-    print(tester.this.can.be)
+    >>> import jsonsempai
+    >>> import tester
+    >>> tester.hello
+    u'world'
+    >>> tester.this.can.be
+    u'nested'
+    >>> 
