@@ -39,6 +39,10 @@ class TestSempai(object):
         import sempai
         assert sempai.one.two.three == 3
 
+    def test_acts_like_dict(self):
+        import sempai
+        assert sempai.one.two == {"three": 3}
+
     def test_location(self):
         import sempai
         assert sempai.__file__ == os.path.join(self.direc, 'sempai.json')
