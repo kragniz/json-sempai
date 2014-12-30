@@ -30,6 +30,7 @@ class TestSempai(object):
 
     def test_import(self):
         import sempai
+        assert sempai
 
     def test_access(self):
         import sempai
