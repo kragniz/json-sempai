@@ -49,6 +49,11 @@ class TestSempai(object):
         sempai.one.two.three = 4
         assert sempai.one.two.three == 4
 
+    def test_del(self):
+        import sempai
+        del sempai.one.two.three
+        assert sempai.one.two.get('three', 'not at home') == 'not at home'
+
     def test_location(self):
         import sempai
         assert sempai.__file__ == os.path.join(self.direc, 'sempai.json')
