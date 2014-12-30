@@ -35,6 +35,7 @@ class SempaiLoader(object):
     def load_module(self, name):
         mod = imp.new_module(name)
         mod.__file__ = self.json_path
+        mod.__loader__ = self
 
         try:
             with open(self.json_path) as f:
