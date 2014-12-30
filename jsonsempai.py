@@ -8,7 +8,7 @@ class Dot(dict):
 
     def __init__(self, d):
         super(dict, self).__init__()
-        for k, v in d.iteritems():
+        for k, v in iter(d.items()):
             if isinstance(v, dict):
                 self[k] = Dot(v)
             else:
