@@ -16,11 +16,20 @@ class TestSempai(object):
         self.direc = tempfile.mkdtemp(prefix='jsonsempai')
         sys.path.append(self.direc)
 
-        with open(os.path.join(self.direc, 'test_sempai.json'), 'w') as f:
+        with open(os.path.join(self.direc, 'sempai.json'), 'w') as f:
             f.write(TEST_FILE)
 
     def teardown(self):
+        sys.path.remove(self.direc)
         shutil.rmtree(self.direc)
 
     def test_import(self):
-        import test_sempai
+        import sempai
+
+    def test_access(self):
+        import sempai
+        assert sempai.three == 3
+
+    def test_location(self):
+        import sempai
+        assert sempai.__file__ == os.path.join(self.direc, 'sempai.json')
