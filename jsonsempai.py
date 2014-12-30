@@ -29,7 +29,7 @@ class SempaiLoader(object):
 
     def find_module(self, name, path=None):
         for d in sys.path:
-            self.json_path = os.path.join(d, '{}.json'.format(name))
+            self.json_path = os.path.join(d, '{name}.json'.format(name=name))
             if os.path.isfile(self.json_path):
                 return self
         return None
