@@ -31,7 +31,6 @@ class SempaiLoader(object):
         for d in sys.path:
             self.json_path = os.path.join(d, '{}.json'.format(name))
             if os.path.isfile(self.json_path):
-                print self.json_path
                 return self
         return None
 
