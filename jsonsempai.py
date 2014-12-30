@@ -40,9 +40,12 @@ class SempaiLoader(object):
         try:
             with open(self.json_path) as f:
                 d = json.load(f)
+        except ValueError:
+            raise ImportError(
+                '"{}" does not contain valid json.'.format(self.json_path))
         except:
             raise ImportError(
-                'Couldn\'t load json from"{}".'.format(self.json_path))
+                'Could not open "{}".'.format(self.json_path))
 
         mod.__dict__.update(d)
         for k, i in mod.__dict__.items():
