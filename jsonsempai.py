@@ -32,9 +32,11 @@ class SempaiLoader(object):
             self.json_path = os.path.join(d, '{name}.json'.format(name=name))
             if os.path.isfile(self.json_path):
                 return self
-        return None
 
     def load_module(self, name):
+        if name in sys.modules:
+            return sys.modules[name]
+
         mod = imp.new_module(name)
         mod.__file__ = self.json_path
         mod.__loader__ = self
@@ -54,6 +56,7 @@ class SempaiLoader(object):
             if isinstance(i, dict):
                 mod.__dict__[k] = Dot(i)
 
+        sys.modules[name] = mod
         return mod
 
 sys.meta_path.append(SempaiLoader())

@@ -55,5 +55,6 @@ class TestSempai(object):
         assert sempai.one.two.get('three', 'not at home') == 'not at home'
 
     def test_location(self):
+        del sys.modules['sempai'] # force the module to be reloaded
         import sempai
         assert sempai.__file__ == os.path.join(self.direc, 'sempai.json')
