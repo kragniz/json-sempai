@@ -30,6 +30,8 @@ Now import jsonsempai and your json file!
 
     >>> import jsonsempai
     >>> import tester
+    >>> tester
+    <module 'tester' from 'tester.json'>
     >>> tester.hello
     u'world'
     >>> tester.this.can.be
