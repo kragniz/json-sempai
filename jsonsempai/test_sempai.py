@@ -1,9 +1,9 @@
-import jsonsempai
-
 import os
 import shutil
 import sys
 import tempfile
+
+import jsonsempai
 
 TEST_FILE = '''{
     "three": 3,
