@@ -42,7 +42,8 @@ Now import jsonsempai and your json file!
 .. code:: python
 
     >>> import jsonsempai
-    >>> import tester
+    >>> with jsonsempai.imports():
+    ...     import tester
     >>> tester
     <module 'tester' from 'tester.json'>
     >>> tester.hello
