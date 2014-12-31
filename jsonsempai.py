@@ -1,3 +1,4 @@
+import contextlib
 import imp
 import json
 import os
@@ -34,12 +35,15 @@ class Dot(dict):
 
 
 class SempaiLoader(object):
+    def __init__(self, json_path):
+        self.json_path = json_path
 
-    def find_module(self, name, path=None):
+    @classmethod
+    def find_module(cls, name, path=None):
         for d in sys.path:
-            self.json_path = os.path.join(d, '{name}.json'.format(name=name))
-            if os.path.isfile(self.json_path):
-                return self
+            json_path = os.path.join(d, '{name}.json'.format(name=name))
+            if os.path.isfile(json_path):
+                return cls(json_path)
 
     def load_module(self, name):
         if name in sys.modules:
@@ -64,4 +68,11 @@ class SempaiLoader(object):
         sys.modules[name] = mod
         return mod
 
-sys.meta_path.append(SempaiLoader())
+
+@contextlib.contextmanager
+def imports():
+    try:
+        sys.meta_path.append(SempaiLoader)
+        yield
+    finally:
+        sys.meta_path.remove(SempaiLoader)
