@@ -41,9 +41,8 @@ Now import jsonsempai and your json file!
 
 .. code:: python
 
-    >>> import jsonsempai
-    >>> with jsonsempai.imports():
-    ...     import tester
+    >>> from jsonsempai import magic
+    >>> import tester
     >>> tester
     <module 'tester' from 'tester.json'>
     >>> tester.hello
@@ -51,6 +50,16 @@ Now import jsonsempai and your json file!
     >>> tester.this.can.be
     u'nested'
     >>>
+
+Alternatively, a context manager may be used (100% less magic):
+
+.. code:: python
+
+    >>> import jsonsempai
+    >>> with jsonsempai.imports():
+    ...     import tester
+    >>> tester
+    <module 'tester' from 'tester.json'>
 
 Installing
 ----------
