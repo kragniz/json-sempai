@@ -27,6 +27,5 @@ setup(name='json-sempai',
           'Programming Language :: Python :: 3.4',
       ],
       keywords='please don\'t use this library for anything',
-      py_modules=['jsonsempai'],
-      test_suite='test_sempai',
+      packages=['jsonsempai'],
 )
