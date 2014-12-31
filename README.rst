@@ -12,6 +12,15 @@ Have you ever been kept awake at night, desperately feeling a burning desire to
 do nothing else but directly import JSON files as if they were python modules
 [#]_? Now you can!
 
+This abomination allows you to write
+
+.. code:: python
+
+     import some_json_file
+
+and if ``some_json_file.json`` can be found, it will be available as if it is a
+python module.
+
 Usage
 -----
 
