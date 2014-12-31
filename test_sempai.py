@@ -11,7 +11,13 @@ TEST_FILE = '''{
         "two": {
             "three": 3
         }
-    }
+    },
+    "array": [
+        {"nested": "but dotted"},
+        {"array": [
+            {"and_nested_again": "dotted"}
+        ]}
+    ]
 }'''
 
 
@@ -58,3 +64,15 @@ class TestSempai(object):
         del sys.modules['sempai'] # force the module to be reloaded
         import sempai
         assert sempai.__file__ == os.path.join(self.direc, 'sempai.json')
+
+    def test_array(self):
+        import sempai
+        assert sempai.array[0] == {"nested": "but dotted"}
+
+    def test_array_dotting(self):
+        import sempai
+        assert sempai.array[0].nested == "but dotted"
+
+    def test_array_nested_dotting(self):
+        import sempai
+        assert sempai.array[1].array[0].and_nested_again == "dotted"

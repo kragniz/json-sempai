@@ -11,6 +11,14 @@ class Dot(dict):
         for k, v in iter(d.items()):
             if isinstance(v, dict):
                 self[k] = Dot(v)
+            elif isinstance(v, list):
+                a = []
+                for item in v:
+                    if isinstance(item, dict):
+                        a.append(Dot(item))
+                    else:
+                        a.append(item)
+                self[k] = a
             else:
                 self[k] = v
 
@@ -51,10 +59,7 @@ class SempaiLoader(object):
             raise ImportError(
                 'Could not open "{}".'.format(self.json_path))
 
-        mod.__dict__.update(d)
-        for k, i in mod.__dict__.items():
-            if isinstance(i, dict):
-                mod.__dict__[k] = Dot(i)
+        mod.__dict__.update(Dot(d))
 
         sys.modules[name] = mod
         return mod
