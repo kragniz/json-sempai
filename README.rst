@@ -5,7 +5,7 @@ json-sempai
 .. image:: https://travis-ci.org/kragniz/json-sempai.png?branch=master
     :target: https://travis-ci.org/kragniz/json-sempai
 
-.. image:: https://pypip.in/d/json-sempai/badge.png
+.. image:: https://pypip.in/version/json-sempai/badge.png?style=flat
     :target: https://pypi.python.org/pypi/json-sempai
 
 Have you ever been kept awake at night, desperately feeling a burning desire to
