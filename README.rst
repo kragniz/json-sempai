@@ -50,5 +50,10 @@ Install from pip:
 
     $ pip install json-sempai
 
+or clone this repo and install from source:
+
+.. code:: bash
+
+    $ python setup.py install
 
 .. [#] Disclaimer: Only do this if you hate yourself and the rest of the world.
