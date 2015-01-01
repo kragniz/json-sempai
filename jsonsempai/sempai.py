@@ -5,18 +5,18 @@ import os
 import sys
 
 
-class Dot(dict):
+class DottedDict(dict):
 
     def __init__(self, d):
         super(dict, self).__init__()
         for k, v in iter(d.items()):
             if isinstance(v, dict):
-                self[k] = Dot(v)
+                self[k] = DottedDict(v)
             elif isinstance(v, list):
                 a = []
                 for item in v:
                     if isinstance(item, dict):
-                        a.append(Dot(item))
+                        a.append(DottedDict(item))
                     else:
                         a.append(item)
                 self[k] = a
@@ -63,7 +63,7 @@ class SempaiLoader(object):
             raise ImportError(
                 'Could not open "{}".'.format(self.json_path))
 
-        mod.__dict__.update(Dot(d))
+        mod.__dict__.update(DottedDict(d))
 
         sys.modules[name] = mod
         return mod
