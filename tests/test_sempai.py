@@ -17,7 +17,8 @@ TEST_FILE = '''{
         {"array": [
             {"and_nested_again": "dotted"}
         ]}
-    ]
+    ],
+    "lots_of_lists": [[{"in_da_list": true}]]
 }'''
 
 
@@ -86,3 +87,8 @@ class TestSempai(object):
         with jsonsempai.imports():
             import sempai
         assert sempai.array[1].array[0].and_nested_again == "dotted"
+
+    def test_obj_in_list_in_list(self):
+        with jsonsempai.imports():
+            import sempai
+        assert sempai.lots_of_lists[0][0].in_da_list == True
