@@ -1,5 +1,5 @@
 import sys
 
-from .jsonsempai import SempaiLoader
+from .sempai import SempaiLoader
 
 sys.meta_path.append(SempaiLoader)

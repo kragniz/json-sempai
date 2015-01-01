@@ -1,1 +1,1 @@
-from .jsonsempai import imports
+from .sempai import imports
