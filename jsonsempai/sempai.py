@@ -7,22 +7,6 @@ import sys
 
 class DottedDict(dict):
 
-    def __init__(self, d):
-        super(dict, self).__init__()
-        for k, v in iter(d.items()):
-            if isinstance(v, dict):
-                self[k] = DottedDict(v)
-            elif isinstance(v, list):
-                a = []
-                for item in v:
-                    if isinstance(item, dict):
-                        a.append(DottedDict(item))
-                    else:
-                        a.append(item)
-                self[k] = a
-            else:
-                self[k] = v
-
     def __getattr__(self, attr):
         try:
             return self[attr]
@@ -53,17 +37,19 @@ class SempaiLoader(object):
         mod.__file__ = self.json_path
         mod.__loader__ = self
 
+        decoder = json.JSONDecoder(object_hook=lambda obj: DottedDict(obj))
         try:
             with open(self.json_path) as f:
-                d = json.load(f)
+                d = decoder.decode(f.read())
         except ValueError:
             raise ImportError(
                 '"{}" does not contain valid json.'.format(self.json_path))
         except:
+            raise
             raise ImportError(
                 'Could not open "{}".'.format(self.json_path))
 
-        mod.__dict__.update(DottedDict(d))
+        mod.__dict__.update(d)
 
         sys.modules[name] = mod
         return mod
