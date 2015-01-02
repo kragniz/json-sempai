@@ -9,7 +9,7 @@ with open('README.rst') as file_readme:
     readme = file_readme.read()
 
 setup(name='json-sempai',
-      version='0.2.0',
+      version='0.3.0',
       description='Use JSON files as if they\'re python modules',
       long_description=readme,
       author='Louis Taylor',
