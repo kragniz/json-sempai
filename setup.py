@@ -28,4 +28,5 @@ setup(name='json-sempai',
       ],
       keywords='please don\'t use this library for anything',
       packages=['jsonsempai'],
+      test_suite='jsonsempai.tests'
 )
