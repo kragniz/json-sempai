@@ -45,7 +45,6 @@ class SempaiLoader(object):
             raise ImportError(
                 '"{}" does not contain valid json.'.format(self.json_path))
         except:
-            raise
             raise ImportError(
                 'Could not open "{}".'.format(self.json_path))
 
