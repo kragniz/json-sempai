@@ -8,4 +8,4 @@ python:
   - "pypy"
 sudo: false
 install: pip install -e .
-script: py.test
+script: python setup.py test
