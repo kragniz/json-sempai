@@ -37,7 +37,8 @@ class SempaiLoader(object):
         mod.__file__ = self.json_path
         mod.__loader__ = self
 
-        decoder = json.JSONDecoder(object_hook=lambda obj: DottedDict(obj))
+        decoder = json.JSONDecoder(object_hook=DottedDict)
+        
         try:
             with open(self.json_path) as f:
                 d = decoder.decode(f.read())
