@@ -95,3 +95,10 @@ class TestSempai(unittest.TestCase):
         with jsonsempai.imports():
             import sempai
         self.assertTrue(sempai.lots_of_lists[0][0].in_da_list)
+
+    def test_import_invalid_file(self):
+        with open(os.path.join(self.direc, 'invalid.json'), 'w') as f:
+            f.write('not a valid json file')
+
+        with jsonsempai.imports():
+            self.assertRaises(ImportError, __import__, 'invalid')
