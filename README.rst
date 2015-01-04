@@ -76,4 +76,10 @@ or clone this repo and install from source:
 
     $ python setup.py install
 
+To purge this horror from your machine:
+
+.. code:: bash
+
+    $ pip uninstall json-sempai
+
 .. [#] Disclaimer: Only do this if you hate yourself and the rest of the world.
