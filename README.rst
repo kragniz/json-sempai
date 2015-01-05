@@ -37,11 +37,15 @@ Slap a json file somewhere on your python path. ``tester.json``:
         }
     }
 
-Now import jsonsempai and your json file!
+Magic
+~~~~~
+
+Now import jsonsempai and import any json file residing on your Python path! 
 
 .. code:: python
 
     >>> from jsonsempai import magic
+    >>> # ../Python27/Scripts/tester.json
     >>> import tester
     >>> tester
     <module 'tester' from 'tester.json'>
@@ -51,7 +55,30 @@ Now import jsonsempai and your json file!
     u'nested'
     >>>
 
-Alternatively, a context manager may be used (100% less magic):
+
+Voodoo
+~~~~~~
+
+Similar to Magic, but is limited to json files in the same directory
+
+.. code:: python
+
+    >>> from jsonsempai import voodoo
+    >>> # /Python27/Scripts/tester.json
+    >>> import tester
+    ImportError: No module named tester_
+    >>> # /foobar/voodoo_tester.json
+    >>> import voodo_tester
+    >>> voodoo_tester
+    <module 'voodoo_tester' from 'voodoo_tester.json'>
+    >>> voodoo_tester.hello
+    u'world'
+    >>> voodoo_tester.this.can.be
+    u'nested'
+    >>>
+
+
+Alternatively, a context manager may be used (100% less magic, 0% voodoo):
 
 .. code:: python
 
