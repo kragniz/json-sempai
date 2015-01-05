@@ -61,6 +61,11 @@ class SempaiContextLoader(object):
 
     @classmethod
     def find_module(cls, name, path=None):
+
+        if '.' in name:
+            name = name.split('.')
+            name = os.path.join(*name)
+
         for d, _, _ in os.walk(os.path.abspath(os.curdir)):
             json_path = os.path.join(d, '{name}.json'.format(name=name))
             if os.path.isfile(json_path):
