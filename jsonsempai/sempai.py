@@ -30,11 +30,18 @@ class SempaiLoader(object):
 
     @classmethod
     def find_module(cls, name, path=None):
-        for d in sys.path + path if path is not None else []:
-            name = name.split('.')[-1]
+        for d in sys.path:
             json_path = get_json_path(d, name)
             if json_path is not None:
                 return cls(json_path)
+
+        if path is not None:
+            name = name.split('.')[-1]
+            for d in path:
+                json_path = get_json_path(d, name)
+                if json_path is not None:
+                    return cls(json_path)
+
 
     def load_module(self, name):
         if name in sys.modules:
