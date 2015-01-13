@@ -18,15 +18,22 @@ class DottedDict(dict):
     __delattr__ = dict.__delitem__
 
 
+def get_json_path(directory, name):
+    json_path = os.path.join(directory, '{name}.json'.format(name=name))
+    if os.path.isfile(json_path):
+        return json_path
+
+
 class SempaiLoader(object):
     def __init__(self, json_path):
         self.json_path = json_path
 
     @classmethod
     def find_module(cls, name, path=None):
-        for d in sys.path:
-            json_path = os.path.join(d, '{name}.json'.format(name=name))
-            if os.path.isfile(json_path):
+        for d in sys.path + path if path is not None else []:
+            name = name.split('.')[-1]
+            json_path = get_json_path(d, name)
+            if json_path is not None:
                 return cls(json_path)
 
     def load_module(self, name):
@@ -38,7 +45,7 @@ class SempaiLoader(object):
         mod.__loader__ = self
 
         decoder = json.JSONDecoder(object_hook=DottedDict)
-        
+
         try:
             with open(self.json_path) as f:
                 d = decoder.decode(f.read())
