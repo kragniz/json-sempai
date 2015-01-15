@@ -61,6 +61,15 @@ Alternatively, a context manager may be used (100% less magic):
     >>> tester
     <module 'tester' from 'tester.json'>
 
+
+Python packages are also supported:
+
+.. code:: python
+
+    >>> from jsonsempai import magic
+    >>> from py_package import json_file
+    >>> import py_package.json_file
+
 Installing
 ----------
 
