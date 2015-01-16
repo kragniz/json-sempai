@@ -67,8 +67,13 @@ Python packages are also supported:
 .. code:: python
 
     >>> from jsonsempai import magic
-    >>> from py_package import json_file
-    >>> import py_package.json_file
+    >>> from python_package import file
+    >>> file
+    <module 'python_package.file' from 'python_package/file.json'>
+    >>> import python_package.nested_package.second
+    >>> python_package.nested_package.second
+    <module 'python_package.nested_package.second' from 'python_package/nested_package/second.json'>
+
 
 Installing
 ----------
