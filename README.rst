@@ -64,6 +64,17 @@ Alternatively, a context manager may be used (100% less magic):
 
 Python packages are also supported:
 
+.. code:: bash
+
+    $ tree
+    .
+    └── python_package
+        ├── file.json
+        ├── __init__.py
+        └── nested_package
+            ├── __init__.py
+            └── second.json
+
 .. code:: python
 
     >>> from jsonsempai import magic
