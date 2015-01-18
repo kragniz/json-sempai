@@ -127,3 +127,9 @@ class TestSempaiPackages(unittest.TestCase):
             from python_package import nested
 
         self.assertEqual(3, nested.three)
+
+    def test_import_package(self):
+        with jsonsempai.imports():
+            import python_package.nested
+
+        self.assertEqual(3, python_package.nested.three)
