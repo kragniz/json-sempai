@@ -102,3 +102,28 @@ class TestSempai(unittest.TestCase):
 
         with jsonsempai.imports():
             self.assertRaises(ImportError, __import__, 'invalid')
+
+
+class TestSempaiPackages(unittest.TestCase):
+
+    def setUp(self):
+        self.direc = tempfile.mkdtemp(prefix='jsonsempai')
+        sys.path.append(self.direc)
+
+        python_package = os.path.join(self.direc, 'python_package')
+        os.makedirs(python_package)
+
+        open(os.path.join(python_package, '__init__.py'), 'w').close()
+
+        with open(os.path.join(python_package, 'nested.json'), 'w') as f:
+            f.write(TEST_FILE)
+
+    def tearDown(self):
+        sys.path.remove(self.direc)
+        shutil.rmtree(self.direc)
+
+    def test_import_from_package(self):
+        with jsonsempai.imports():
+            from python_package import nested
+
+        self.assertEqual(3, nested.three)
