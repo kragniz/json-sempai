@@ -24,7 +24,7 @@ python module.
 Usage
 -----
 
-Slap a json file somewhere on your python path. ``tester.json``:
+Slap a json file somewhere on your python path. ``me.json``:
 
 .. code:: json
 
@@ -42,12 +42,12 @@ Now import jsonsempai and your json file!
 .. code:: python
 
     >>> from jsonsempai import magic
-    >>> import tester
-    >>> tester
-    <module 'tester' from 'tester.json'>
-    >>> tester.hello
+    >>> import me
+    >>> me
+    <module 'me' from 'me.json'>
+    >>> me.hello
     u'world'
-    >>> tester.this.can.be
+    >>> me.this.can.be
     u'nested'
     >>>
 
@@ -56,10 +56,10 @@ Alternatively, a context manager may be used (100% less magic):
 .. code:: python
 
     >>> import jsonsempai
-    >>> with jsonsempai.imports():
-    ...     import tester
-    >>> tester
-    <module 'tester' from 'tester.json'>
+    >>> with jsonsempai.notice():
+    ...     import me
+    >>> me
+    <module 'me' from 'me.json'>
 
 
 Python packages are also supported:

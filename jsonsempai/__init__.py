@@ -1,2 +1,2 @@
-from .sempai import imports
+from .sempai import notice
 from . import tests
