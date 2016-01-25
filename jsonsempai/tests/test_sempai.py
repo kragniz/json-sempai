@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 import shutil
 import sys
@@ -13,6 +15,9 @@ TEST_FILE = '''{
             "three": 3
         }
     },
+	"_unicode": {
+		"chinese":"汉语/漢語"
+	},
     "array": [
         {"nested": "but dotted"},
         {"array": [
@@ -102,6 +107,11 @@ class TestSempai(unittest.TestCase):
 
         with jsonsempai.imports():
             self.assertRaises(ImportError, __import__, 'invalid')
+
+    def test_unicode(self):
+        with jsonsempai.imports():
+            import sempai
+        self.assertEqual(sempai._unicode.chinese, u"汉语/漢語")
 
 
 class TestSempaiPackages(unittest.TestCase):
