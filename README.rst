@@ -2,7 +2,7 @@
 json-sempai
 ===========
 
-.. image:: https://travis-ci.org/kragniz/json-sempai.png?branch=master
+.. image:: https://travis-ci.org/kragniz/json-sempai.svg?branch=master
     :target: https://travis-ci.org/kragniz/json-sempai
 
 .. image:: https://img.shields.io/pypi/v/json-sempai.svg
