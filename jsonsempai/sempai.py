@@ -18,7 +18,7 @@ class DottedDict(dict):
     __delattr__ = dict.__delitem__
 
 
-class UnicodeCode(unicode):
+class UnicodeCode(str):
 
     def __call__(self, *args, **kwargs):
         return eval(self)(*args, **kwargs)
@@ -72,7 +72,7 @@ class SempaiLoader(object):
             raise ImportError(
                 'Could not open "{name}".'.format(name=self.json_path))
 
-        mod.__dict__.update({k: wrap_unicode(v) for k, v in d.iteritems()})
+        mod.__dict__.update(dict((k, wrap_unicode(v)) for k, v in d.iteritems()))
 
         sys.modules[name] = mod
         return mod
