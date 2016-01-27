@@ -9,13 +9,23 @@ class DottedDict(dict):
 
     def __getattr__(self, attr):
         try:
-            return self[attr]
+            return wrap_unicode(self[attr])
         except KeyError:
             raise AttributeError("'{}'".format(attr))
 
     __setattr__ = dict.__setitem__
 
     __delattr__ = dict.__delitem__
+
+
+class UnicodeCode(unicode):
+
+    def __call__(self, *args, **kwargs):
+        return eval(self)(*args, **kwargs)
+
+
+def wrap_unicode(value):
+    return UnicodeCode(value) if isinstance(value, basestring) else value
 
 
 def get_json_path(directory, name):
@@ -42,7 +52,6 @@ class SempaiLoader(object):
                 if json_path is not None:
                     return cls(json_path)
 
-
     def load_module(self, name):
         if name in sys.modules:
             return sys.modules[name]
@@ -63,7 +72,7 @@ class SempaiLoader(object):
             raise ImportError(
                 'Could not open "{name}".'.format(name=self.json_path))
 
-        mod.__dict__.update(d)
+        mod.__dict__.update({k: wrap_unicode(v) for k, v in d.iteritems()})
 
         sys.modules[name] = mod
         return mod
