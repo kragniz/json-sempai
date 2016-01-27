@@ -72,7 +72,7 @@ class SempaiLoader(object):
             raise ImportError(
                 'Could not open "{name}".'.format(name=self.json_path))
 
-        mod.__dict__.update(dict((k, wrap_unicode(v)) for k, v in d.iteritems()))
+        mod.__dict__.update(dict((k, wrap_unicode(v)) for k, v in d.items()))
 
         sys.modules[name] = mod
         return mod
