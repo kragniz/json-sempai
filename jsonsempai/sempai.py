@@ -18,6 +18,12 @@ class DottedDict(dict):
     __delattr__ = dict.__delitem__
 
 
+try:
+    basestring = basestring
+except NameError:
+    basestring = (str, bytes)
+
+
 class UnicodeCode(str):
 
     def __call__(self, *args, **kwargs):
