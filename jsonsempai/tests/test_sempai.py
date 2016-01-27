@@ -19,7 +19,9 @@ TEST_FILE = '''{
             {"and_nested_again": "dotted"}
         ]}
     ],
-    "lots_of_lists": [[{"in_da_list": true}]]
+    "lots_of_lists": [[{"in_da_list": true}]],
+    "code": "lambda x: x + 1",
+    "args": [1, 2, 3]
 }'''
 
 
@@ -81,6 +83,7 @@ class TestSempai(unittest.TestCase):
             import sempai
         self.assertEqual({"nested": "but dotted"},
                          sempai.array[0])
+
     def test_array_dotting(self):
         with jsonsempai.imports():
             import sempai
@@ -102,6 +105,13 @@ class TestSempai(unittest.TestCase):
 
         with jsonsempai.imports():
             self.assertRaises(ImportError, __import__, 'invalid')
+
+    def test_eval_code(self):
+        with jsonsempai.imports():
+            import sempai
+        eval_code = eval(sempai.code)
+        self.assertEqual(list(map(sempai.code, sempai.args)),
+                         list(map(eval_code, sempai.args)))
 
 
 class TestSempaiPackages(unittest.TestCase):
