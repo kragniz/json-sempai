@@ -110,7 +110,8 @@ class TestSempai(unittest.TestCase):
         with jsonsempai.imports():
             import sempai
         eval_code = eval(sempai.code)
-        self.assertEqual(map(sempai.code, sempai.args), map(eval_code, sempai.args))
+        self.assertEqual(list(map(sempai.code, sempai.args)),
+                         list(map(eval_code, sempai.args)))
 
 
 class TestSempaiPackages(unittest.TestCase):
