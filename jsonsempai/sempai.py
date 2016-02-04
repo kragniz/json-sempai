@@ -23,7 +23,7 @@ class DottedDict(dict):
             return self[attr]
         except KeyError:
             raise AttributeError("'{}'".format(attr))
-            
+   
     __setattr__ = dict.__setitem__
     __delattr__ = dict.__delitem__
     
@@ -40,22 +40,11 @@ class DateTimeEncoder(json.JSONEncoder):
 
 
 
-def get_yaml_path(directory, name):
-    yaml_path = os.path.join(directory, '{name}.yaml'.format(name=name))
-    if os.path.isfile(yaml_path):
-        return yaml_path
+def get_markup_path(directory, name, markup):
+    markup_path = os.path.join(directory, '{name}.{markup}'.format(name=name, markup=markup))       
+    if os.path.isfile(markup_path):
+        return markup_path
 
-def get_xml_path(directory, name):
-    xml_path = os.path.join(directory, '{name}.xml'.format(name=name))
-    if os.path.isfile(xml_path):
-        return xml_path
-
-def get_json_path(directory, name):
-    json_path = os.path.join(directory, '{name}.json'.format(name=name))
-    if os.path.isfile(json_path):
-        return json_path
-        
-        
 
 
 class SempaiLoader(object):
@@ -66,18 +55,18 @@ class SempaiLoader(object):
     def find_module(cls, name, path=None):
         for d in sys.path:
             markup_path = None
-            for get_markup_path in [get_json_path, get_yaml_path, get_xml_path]:
+            for markup in ['json', 'yaml', 'xml']:
                 if markup_path is None:
-                    markup_path = get_markup_path(d, name)
+                    markup_path = get_markup_path(d, name, markup)
             if markup_path is not None:
                 return cls(markup_path)
 
         if path is not None:
             name = name.split('.')[-1]
             for d in path:
-                for get_markup_path in [get_json_path, get_yaml_path, get_xml_path]:
+                for markup in ['json', 'yaml', 'xml']:
                     if markup_path is None:
-                        markup_path = get_markup_path(d, name)
+                        markup_path = get_markup_path(d, name, markup)
                 if markup_path is not None:
                     return cls(markup_path)
 
@@ -92,7 +81,6 @@ class SempaiLoader(object):
 
         decoder = json.JSONDecoder(object_hook=DottedDict)
 
-        
         try:
             markup = self.markup_path.split(".")[-1]
             with open(self.markup_path, 'r') as f:
