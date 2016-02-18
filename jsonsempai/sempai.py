@@ -18,7 +18,7 @@ class DottedDict(dict):
 
 
 def get_json_path(directory, name):
-    json_path = os.path.join(directory, '{name}.json'.format(name=name))
+    json_path = os.path.join(directory, '{}.json'.format(name))
     if os.path.isfile(json_path):
         return json_path
 
@@ -56,15 +56,19 @@ class SempaiLoader(object):
                 d = decoder.decode(f.read())
         except ValueError:
             raise ImportError(
-                    '"{name}" does not contain valid json.'.format(name=self.json_path))
+                    '"{}" does not contain valid json.'.format(self.json_path))
         except:
             raise ImportError(
-                    'Could not open "{name}".'.format(name=self.json_path))
+                    'Could not open "{}".'.format(self.json_path))
 
         mod.__dict__.update(d)
 
         sys.modules[name] = mod
         return mod
+
+
+def imports():
+    notice()
 
 
 @contextlib.contextmanager
