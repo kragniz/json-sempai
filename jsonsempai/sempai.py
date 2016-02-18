@@ -1,12 +1,11 @@
 import contextlib
-import imp
+import types
 import json
 import os
 import sys
 
 
 class DottedDict(dict):
-
     def __getattr__(self, attr):
         try:
             return self[attr]
@@ -42,12 +41,11 @@ class SempaiLoader(object):
                 if json_path is not None:
                     return cls(json_path)
 
-
     def load_module(self, name):
         if name in sys.modules:
             return sys.modules[name]
 
-        mod = imp.new_module(name)
+        mod = types.ModuleType(name)
         mod.__file__ = self.json_path
         mod.__loader__ = self
 
@@ -58,10 +56,10 @@ class SempaiLoader(object):
                 d = decoder.decode(f.read())
         except ValueError:
             raise ImportError(
-                '"{name}" does not contain valid json.'.format(name=self.json_path))
+                    '"{name}" does not contain valid json.'.format(name=self.json_path))
         except:
             raise ImportError(
-                'Could not open "{name}".'.format(name=self.json_path))
+                    'Could not open "{name}".'.format(name=self.json_path))
 
         mod.__dict__.update(d)
 
@@ -69,8 +67,12 @@ class SempaiLoader(object):
         return mod
 
 
-@contextlib.contextmanager
 def imports():
+    notice()
+
+
+@contextlib.contextmanager
+def notice():
     try:
         sys.meta_path.append(SempaiLoader)
         yield
